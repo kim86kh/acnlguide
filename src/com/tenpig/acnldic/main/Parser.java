@@ -17,13 +17,14 @@ public class Parser {
 		String s = null;
 		String[] buf = null;
 		Pattern p = Pattern.compile("<.*?>");
+		Pattern pTime=Pattern.compile("(\\d)([AP]M)\\s-\\s(\\d)([AP]M):(.*)");
 		String ptnNameBegin = "<span class=\"catch-name\">";
 		String ptnNameEnd = "</span>";
 
 		int c = 0;
 		while ((s = br.readLine()) != null) {
 			if (s.contains("<!-- -->")) {
-				System.out.println("----------------------");
+			//	System.out.println("----------------------");
 				
 
 			}
@@ -35,8 +36,10 @@ public class Parser {
 			s=s.replaceAll("<.*?>", "").trim();
 			if(s.length()==0) continue;
 			
-			 System.out.println(s);
-			Matcher m = p.matcher(s);
+			// System.out.println(s);
+			Matcher m = pTime.matcher(s);
+			if(m.find()) System.out.println(m.group(1));
+			
 
 		}
 		System.out.println(c);
